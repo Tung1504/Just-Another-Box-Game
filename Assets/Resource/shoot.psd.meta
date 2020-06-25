@@ -11,6 +11,12 @@ TextureImporter:
   - first:
       213: 629617002330759104
     second: shoot_2
+  - first:
+      213: -5054808157803969943
+    second: shoot_3
+  - first:
+      213: 9127970764875106901
+    second: shoot_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,8 +121,8 @@ TextureImporter:
         y: 21
         width: 33
         height: 3
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -150,22 +156,22 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shoot_2
+      name: shoot_3
       rect:
         serializedVersion: 2
         x: 89
         y: 8
         width: 30
         height: 24
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 9
+      pivot: {x: 0.38200024, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cf9878e359dcb800800000000000000
-      internalID: 629617002330759104
+      spriteID: 55a08807c011dae70800000000000000
+      internalID: 9127970764875106901
       vertices: []
       indices: 
       edges: []
