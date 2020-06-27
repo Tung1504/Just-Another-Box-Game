@@ -1,23 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rgd2;
     private Animator anim;
     
+    // Events
+    
+    
+    // Running
     public float speed;
-    private float moveInput;    
+    private float moveInput;
+    public float crunchSpeed;
 
+    // Celling Check
     public Collider2D colliderDisable;
     public Transform cellingCheck;
     public bool isTouchingCelling;
     
+    // Ground Check
     public bool isGround;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask groundLayer;
+
+    //Jump
+    public float jumpForce;
     
     // Start is called before the first frame update
     void Start()
@@ -58,6 +69,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey("down") && isGround  || isGround && isTouchingCelling)
         {
+            rgd2.velocity = new Vector2(moveInput * crunchSpeed, rgd2.velocity.y);
             anim.SetBool("isCrouching", true);
             colliderDisable.enabled = false;
         }
@@ -77,5 +89,28 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("isShooting", false);
         }
 
+        
+        if (Input.GetKeyDown("z") && isGround)
+        {
+            rgd2.velocity = Vector2.up * jumpForce;
+            anim.SetBool("isJump", true);
+        }
+        else
+        {
+            anim.SetBool("isJump", false);
+        }
+
+        if(rgd2.velocity.y < -0.1 && !isGround)
+        {
+            anim.SetBool("isFalling", true);
+        }
+        else
+        {
+            anim.SetBool("isFalling", false);
+        }
+        
     }
+    
+    
+    
 }
