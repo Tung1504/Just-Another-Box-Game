@@ -12,9 +12,9 @@ public class PlayerController : MonoBehaviour
     
     
     // Running
-    public float speed;
+    public float speed = 5f;
     private float moveInput;
-    public float crunchSpeed;
+    public float crunchSpeed = 3f;
 
     // Celling Check
     public Collider2D colliderDisable;
@@ -24,11 +24,13 @@ public class PlayerController : MonoBehaviour
     // Ground Check
     public bool isGround;
     public Transform groundCheck;
-    public float checkRadius;
+    public float checkRadius = 0.5f;
     public LayerMask groundLayer;
 
     //Jump
     public float jumpForce;
+    
+    
     
     // Start is called before the first frame update
     void Start()
@@ -43,7 +45,7 @@ public class PlayerController : MonoBehaviour
         isGround = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
         isTouchingCelling = Physics2D.OverlapCircle(cellingCheck.position, checkRadius, groundLayer);
         
-        moveInput = Input.GetAxis("Horizontal");
+        moveInput = Input.GetAxisRaw("Horizontal");
         rgd2.velocity = new Vector2(moveInput * speed, rgd2.velocity.y);
         if(moveInput < 0)
         {
@@ -57,7 +59,18 @@ public class PlayerController : MonoBehaviour
 
         if (moveInput != 0 && isGround)
         {
-            anim.SetBool("isRunning", true);
+            if (Input.GetKeyDown("a"))
+            {
+                anim.SetBool("isRunningShooting", true);
+            }
+            else if (Input.GetKeyUp("a"))
+            {
+                anim.SetBool("isRunningShooting", false);
+            }
+            else
+            {
+                anim.SetBool("isRunning", true);
+            }
         }
         else if (moveInput == 0 && isGround)
         {
@@ -79,28 +92,44 @@ public class PlayerController : MonoBehaviour
             colliderDisable.enabled = true;
         }
 
-
-        if (Input.GetKeyDown("a") && isGround )
+       
+        if (Input.GetKeyDown("a"))
         {
-            anim.SetBool("isShooting", true);
+            if(isGround)
+            {
+                anim.SetBool("isShooting", true);
+            }
+            else if (!isGround)
+            {
+                anim.SetBool("isAirShooting", true);
+            }
         }
-        else if (Input.GetKeyUp("a") && isGround )
+        else if (Input.GetKeyUp("a"))
         {
-            anim.SetBool("isShooting", false);
+            if (isGround)
+            {
+                anim.SetBool("isShooting", false);
+            }
+            else if (!isGround)
+            {
+                anim.SetBool("isAirShooting", false);
+            }
         }
 
         
-        if (Input.GetKeyDown("z") && isGround)
+        if (Input.GetKeyDown("z") && isGround && !isTouchingCelling)
         {
             rgd2.velocity = Vector2.up * jumpForce;
             anim.SetBool("isJump", true);
+            
         }
         else
         {
+            
             anim.SetBool("isJump", false);
         }
 
-        if(rgd2.velocity.y < -0.1 && !isGround)
+        if(rgd2.velocity.y < 0 && !isGround)
         {
             anim.SetBool("isFalling", true);
         }
@@ -108,6 +137,10 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("isFalling", false);
         }
+
+        
+ 
+        
         
     }
     

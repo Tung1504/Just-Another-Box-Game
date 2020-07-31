@@ -1,0 +1,10 @@
+1, A Puzzle, Action Game
+	- Player is trap to a room in a dungeon which has several condition to escape. 
+	- It will be divided into 32 room and each room maybe be looped.
+	- Player has to find out the correct condition to open the true path to escape the dungeon. If the player chooses wrong, the current room or the previous rooms maybe looped until player solve the puzzle right.
+
+	
+2, Mechanic
+	- Player will be equiped to a weapon in the start of the game/ rooms. If player solved the puzzle correctly, player can keep that weapon. If not, the equipment will be reset and player have to re-choose when start that stage again.
+	- Maybe has customize system for weapon to power-up or change/ remove equipment.
+	- Maybe has Miniboss each 4 stage and big boss in the final Stage.
